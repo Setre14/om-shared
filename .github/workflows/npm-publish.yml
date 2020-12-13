@@ -16,7 +16,7 @@ jobs:
     - run: npm install
     - run: npm run tsc
     - run: npm install npm-ci-login
-    - run: npm npm-ci-login
+    - run: npm run npm-ci-login
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
