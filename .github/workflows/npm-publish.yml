@@ -15,8 +15,6 @@ jobs:
         registry-url:  'https://registry.npmjs.org'
     - run: npm install
     - run: npm run tsc
-    - run: npm install npm-ci-login
-    - run: npm run npm-ci-login
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
