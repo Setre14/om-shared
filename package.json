@@ -10,7 +10,8 @@
     "deploy"
   ],
   "scripts": {
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "npm-ci-login": "npm-ci-login"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
