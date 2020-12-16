@@ -2,7 +2,8 @@ name: Publish shared NPM Package
 
 on:
   push:
-    branch: [master]
+    branches:
+      - master
 
 jobs:
   build:
