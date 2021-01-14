@@ -21,7 +21,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}}
   test:
-    needs: [test, security]
+    needs: security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
