@@ -17,10 +17,10 @@ jobs:
       - run: npm run tsc
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}}
   test:
-    needs: security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,5 +42,21 @@ jobs:
     - run: npm run tsc
     - run: npm publish --access public
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}    
+  tag:
+    needs: build
+    name: Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch "master"
+        uses: actions/checkout@v2
+        with:
+          ref: 'master'
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Tag snapshot
+        uses: tvdias/github-tagger@v0.0.2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.package-version.outputs.current-version }}
